@@ -1,8 +1,6 @@
 
 <?php
 
-$text =  $_SERVER['DOCUMENT_ROOT'] . '/include_db.php';
-echo $text;
 include $_SERVER['DOCUMENT_ROOT'] . '/include_db.php';
 
 $SQL_create_table = "CREATE TABLE IF NOT EXISTS Transactions (
