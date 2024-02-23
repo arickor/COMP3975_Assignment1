@@ -1,13 +1,13 @@
 <?php
+include $_SERVER['DOCUMENT_ROOT'] . '/include_db.php';
 
-include '../include_db.php';
 
 $result = $db->query("SELECT COUNT(*) as count FROM Transactions");
 $row = $result->fetchArray();
 $count = $row['count'];
 
 if ($count == 0) {
-    $file = fopen('../2023 02.csv', 'r');
+    $file = fopen('data/2023 02.csv', 'r');
 
     while (($line = fgetcsv($file)) !== FALSE) {
         $date = SQLite3::escapeString($line[0]);
@@ -25,5 +25,3 @@ if ($count == 0) {
 }
 
 $db->close();
-
-?>
