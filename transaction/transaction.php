@@ -30,11 +30,9 @@ class Transaction
             echo "<td>{$row[3]}</td>";
             echo "<td>{$row[4]}</td>";
             echo "<td>";
-            echo "<a class='btn btn-primary' href='/actions/display/display.php?id={$row[0]}'>Display</a>";
+            echo "<a class='btn btn-warning' href='/actions/update/update.php?date={$row[0]}&shopName={$row[1]}'>Update</a>";
             echo "&nbsp;";
-            echo "<a class='btn btn-warning' href='/actions/update/update.php?id={$row[0]}'>Update</a>";
-            echo "&nbsp;";
-            echo "<a class='btn btn-danger' href='/actions/delete/delete.php?id={$row[0]}'>Delete</a>";
+            echo "<a class='btn btn-danger' href='/actions/delete/delete.php?date={$row[0]}&shopName={$row[1]}'>Delete</a>";
             echo "</td></tr>\n";
         }
         echo "</tbody></table>\n";
@@ -43,10 +41,54 @@ class Transaction
         $db->close();
     }
 
-    public static function addTransaction()
+    public static function addTransaction($date, $shopName, $moneySpent, $moneyDeposited, $bankBalance)
     {
-        // Code to add a transaction
+        include $_SERVER['DOCUMENT_ROOT'] . '/include_db.php';
+
+        // Prepare an SQL statement
+        $stmt = $db->prepare("INSERT INTO Transactions (Date, ShopName, MoneySpent, MoneyDeposited, BankBalance) VALUES (?, ?, ?, ?, ?)");
+
+        // Bind parameters to the SQL statement
+        $stmt = $db->prepare("INSERT INTO Transactions (Date, ShopName, MoneySpent, MoneyDeposited, BankBalance) VALUES (?, ?, ?, ?, ?)");
+
+        $stmt->bindValue(1, $date);
+        $stmt->bindValue(2, $shopName);
+        $stmt->bindValue(3, $moneySpent);
+        $stmt->bindValue(4, $moneyDeposited);
+        $stmt->bindValue(5, $bankBalance);
+
+        try {
+            $stmt->execute();
+        } catch (Exception $e) {
+            // Handle the error
+            echo "Error: " . $e->getMessage();
+        }
+
+        // Close the database connection
+        $db->close();
+    }
+
+    public static function deleteTransaction($date, $shopName)
+    {
+        include $_SERVER['DOCUMENT_ROOT'] . '/include_db.php';
+
+        // Prepare an SQL statement
+        $stmt = $db->prepare("DELETE FROM Transactions WHERE Date = ? AND ShopName = ?");
+
+        // Bind parameters to the SQL statement
+        $stmt->bindValue(1, $date);
+        $stmt->bindValue(2, $shopName);
+
+        try {
+            $stmt->execute();
+        } catch (Exception $e) {
+            // Handle the error
+            return ['error' => $e->getMessage()];
+        }
+
+        // Close the database connection
+        $db->close();
+
+        return ['success' => true];
     }
 }
-
-?>
