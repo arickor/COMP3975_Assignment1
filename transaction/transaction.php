@@ -9,10 +9,10 @@ class Transaction
 
         $resultSet = $db->query('SELECT * FROM Transactions');
 
-        echo "<div class='container'>";
-        echo "<p><a class='btn btn-success' href='/actions/create/create.php'>Create New</a></p>";
+        echo "<div class='container mt-5'>";
+        echo "<p><a class='btn btn-success mb-3' href='/actions/create/create.php'>Create New</a></p>";
 
-        echo "<table class='table table-hover'>\n";
+        echo "<table class='table table-striped table-bordered table-hover'>\n";
         echo "<thead class='thead-dark'>";
         echo "<tr><th scope='col'>Date</th>
         <th scope='col'>ShopName</th>
