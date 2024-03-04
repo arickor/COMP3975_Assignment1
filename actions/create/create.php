@@ -74,4 +74,3 @@
 
 </html>
 
-<?php include("../../inc_footer.php"); ?>
