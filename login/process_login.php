@@ -47,9 +47,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $row = $result->fetchArray(SQLITE3_ASSOC);
                     if ($row) {
                         if (password_verify($password, $row['password'])) {
-                            // Password is correct, redirect to the home page or perform any other action
-                            header('Location: ../index.php');
-                            exit();
+                            if ($row['isApproved'] == 1) {
+                                // User is approved, redirect to the home page
+                                header('Location: ../index.php');
+                                exit();
+                            } else {
+                                // User is not approved
+                                $email_err = 'Your account has not been approved yet.';
+                                header('Location: index.php');
+                            }
                         } else {
                             // Password is incorrect
                             $password_err = 'Incorrect password.';
@@ -63,8 +69,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     }
                     $_SESSION['email_err'] = $email_err;
                     $_SESSION['password_err'] = $password_err;
-                    // $_SESSION['email'] = $email;
-                    // $_SESSION['password'] = $password;
                     header('Location: index.php');
                 }
                 // Verify the password

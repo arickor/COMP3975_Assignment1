@@ -56,7 +56,7 @@ $email_err = isset($_SESSION["email_err"]) ? $_SESSION["email_err"] : '';
                 <input type="submit" class="btn btn-primary" value="Login">
             </div>
             <div>
-                <p>Don't have an account? <a href="../register/index.php">Sign up now</a>.</p>
+                <p>Don't have an account? <a href="../signup/index.php">Sign up now</a>.</p>
             </div>
         </form>
     </div>
