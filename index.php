@@ -1,13 +1,9 @@
 <?php
 session_start();
 
-if (isset($_SESSION["loggedin"])) {
-    header("location: /login/index.php");
-}
 // Check if the user is logged in, if not then redirect to login page
 if ($_SESSION["loggedin"] !== true) {
     header("location: /login/index.php");
-    $_SESSION['authorization_error'] = 'Please login to view the page';
     exit;
 }
 ?>
@@ -38,7 +34,7 @@ if ($_SESSION["loggedin"] !== true) {
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
-                <?php if ($_SESSION['role'] === 'admin'): ?>
+                <?php if ($_SESSION['role'] === 'admin') : ?>
                     <li class="nav-item">
                         <a class="nav-link" href="/admin/index.php">Admin Page</a>
                     </li>
