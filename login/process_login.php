@@ -29,59 +29,42 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Check if there are no errors
     if (empty($email_err) && empty($password_err)) {
         include_once '../include_db.php';
-        // Prepare a SELECT statement to check if the user exists in the database
-        $sql = 'SELECT * FROM Users WHERE email = :email';
+        $sql = 'SELECT * FROM Users WHERE Email = :email';
         $stmt = $db->prepare($sql);
 
         if ($stmt) {
-            // Bind parameters
             $stmt->bindParam(':email', $email, SQLITE3_TEXT);
             $result = $stmt->execute();
 
-
-            // Execute the prepared statement
             if ($result) {
-                // Check if the user exists
-
-                    // Fetch the user record
-                    $row = $result->fetchArray(SQLITE3_ASSOC);
-                    if ($row) {
-                        if (password_verify($password, $row['password'])) {
-                            if ($row['isApproved'] == 1) {
-                                // User is approved, redirect to the home page
-                                header('Location: ../index.php');
-                                exit();
-                            } else {
-                                // User is not approved
-                                $email_err = 'Your account has not been approved yet.';
-                                header('Location: index.php');
-                            }
+                $row = $result->fetchArray(SQLITE3_ASSOC);
+                if ($row) {
+                    if ($password === $row['Password']) { // Compare the passwords
+                        if ($row['IsApproved'] == 1) {
+                            header('Location: ../index.php');
+                            exit();
                         } else {
-                            // Password is incorrect
-                            $password_err = 'Incorrect password.';
+                            $email_err = 'Your account has not been approved yet.';
                             header('Location: index.php');
                         }
                     } else {
-                        // User does not exist
-                        $email_err = 'Email does not exist.';
+                        $password_err = 'Incorrect password.';
                         header('Location: index.php');
-                        
                     }
-                    $_SESSION['email_err'] = $email_err;
-                    $_SESSION['password_err'] = $password_err;
+                } else {
+                    $email_err = 'Email does not exist.';
                     header('Location: index.php');
                 }
-                // Verify the password
-
+                $_SESSION['email_err'] = $email_err;
+                $_SESSION['password_err'] = $password_err;
+                header('Location: index.php');
             } else {
-                // Error executing the statement
                 echo 'Oops! Something went wrong. Please try again later.';
             }
-        
 
-            // Close the statement
             unset($stmt);
         }
+    }
     }
     // Close the database connection
     $db->close();
