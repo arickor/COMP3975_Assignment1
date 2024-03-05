@@ -15,7 +15,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Table</title>
+    <title>Buckets</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 </head>
@@ -25,21 +25,42 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
         <?php
         // Assuming you have already connected to the SQLite database
 
+        // Add a back button with Bootstrap classes
+        echo "<button onclick='goToIndex()' class='btn btn-primary'>Go Back</button>";
+
+        echo "
+        <script>
+        function goToIndex() {
+          window.location.href = '../index.php';
+        }
+        </script>
+        ";
+
+        // Add a "Create New" button
+        echo "<p><a class='btn btn-success mb-3' href='/bucket_actions/create/create.php'>Create New</a></p>";
+
         // Retrieve the Category and ShopName from the Buckets table
         include $_SERVER['DOCUMENT_ROOT'] . '/include_db.php';
         $query = "SELECT Category, ShopName FROM Buckets";
         $result = $db->query($query);
 
+        // Add a title for the table
+        echo "<h2>Buckets</h2>";
+
         // Create the table
         echo "<table class='table table-striped'>";
-        echo "<thead class='thead-dark'><tr><th>Category</th><th>ShopName</th></tr></thead>";
+        echo "<thead class='thead-dark'><tr><th>Category Name</th><th>Shop Name</th><th>Actions</th></tr></thead>";
 
         // Loop through the result and populate the table rows
         while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
             echo "<tr>";
             echo "<td>" . $row['Category'] . "</td>";
             echo "<td>" . $row['ShopName'] . "</td>";
-            echo "</tr>";
+            echo "<td>";
+            echo "<a class='btn btn-warning' href='/bucket_actions/update/update.php?category=" . urlencode($row['Category']) . "&shopName=" . urlencode($row['ShopName']) . "'>Update</a>";
+            echo "&nbsp;";
+            echo "<a class='btn btn-danger' href='/bucket_actions/delete/delete.php?category=" . urlencode($row['Category']) . "&shopName=" . urlencode($row['ShopName']) . "'>Delete</a>";
+            echo "</td></tr>\n";
         }
 
         echo "</table>";

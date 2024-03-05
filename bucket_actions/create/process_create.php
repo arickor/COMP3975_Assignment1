@@ -1,0 +1,29 @@
+<?php
+
+if (isset($_POST['create'])) {
+    require_once("../../buckets/buckets.php");
+
+    extract($_POST);
+
+    // Get the values from the form
+    $category = $_POST['category'];
+    $shopName = $_POST['shopName'];
+
+    // Check if both Category and ShopName are empty
+    if (empty($category) || empty($shopName)) {
+        // Redirect back to the form with an error message
+        $_SESSION['error_message'] = 'Please provide both Category and Shop Name.';
+        header('Location: create.php');
+        exit;
+    }
+
+    // Add the new bucket
+    $result = Buckets::addBucket($category, $shopName);
+
+    if (isset($result['error'])) {
+        header('Location: create.php?error=' . urlencode($result['error']));
+        exit;
+    }
+
+    header('Location: /admin/manage_bucket.php');
+}
