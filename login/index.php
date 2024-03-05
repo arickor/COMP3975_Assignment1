@@ -7,6 +7,9 @@ session_start();
 // $password = isset($_SESSION["password"]) ? $_SESSION["password"] : '';
 $password_err = isset($_SESSION["password_err"]) ? $_SESSION["password_err"] : '';
 $email_err = isset($_SESSION["email_err"]) ? $_SESSION["email_err"] : '';
+
+// check is loggedin session, and then show error message
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -37,6 +40,12 @@ $email_err = isset($_SESSION["email_err"]) ? $_SESSION["email_err"] : '';
 
 <body>
     <div class="wrapper">
+        <?php
+        if (isset($_SESSION['authorization_error'])) {
+            echo '<div id="error-message" class="alert alert-danger" role="alert">' . $_SESSION['authorization_error'] . '</div>';
+            unset($_SESSION['authorization_error']);
+        }
+        ?>
         <div class="toast">
             <div class="toast-body">
             </div>
@@ -63,15 +72,24 @@ $email_err = isset($_SESSION["email_err"]) ? $_SESSION["email_err"] : '';
 </body>
 
 </html>
-<!-- <?php 
-// Unset the session variables
-unset($_SESSION["email_err"]);
-unset($_SESSION["password_err"]);
-unset($_SESSION["email"]);
-unset($_SESSION["password"]);
-?> -->
+<!-- <?php
+        // Unset the session variables
+        unset($_SESSION["email_err"]);
+        unset($_SESSION["password_err"]);
+        unset($_SESSION["email"]);
+        unset($_SESSION["password"]);
+        ?> -->
 
 <script>
+    window.onload = function() {
+        // After 5 seconds, remove the error message
+        setTimeout(function() {
+            var element = document.getElementById('error-message');
+            if (element) {
+                element.style.display = 'none';
+            }
+        }, 3000);
+    };
     $(document).ready(function() {
         <?php if (strlen($email_err) > 0) { ?>
             $('.toast').toast({

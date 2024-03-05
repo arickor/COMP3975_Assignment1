@@ -42,6 +42,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     if ($password === $row['Password']) { // Compare the passwords
                         if ($row['IsApproved'] == 1) {
                             header('Location: ../index.php');
+                            if ($row['IsAdmin'] == 1) {
+                                $_SESSION['role'] = "admin";
+                            } else {
+                                $_SESSION['role'] = "user";
+                            }
+                            $_SESSION['loggedin'] = true;
                             exit();
                         } else {
                             $email_err = 'Your account has not been approved yet.';
