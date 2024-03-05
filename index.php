@@ -33,12 +33,17 @@ if ($_SESSION["loggedin"] !== true) {
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
+            <ul class="navbar-nav mr-auto">
                 <?php if ($_SESSION['role'] === 'admin') : ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="/admin/index.php">Admin Page</a>
+                        <a class="nav-link" href="/admin/manage_users.php">Manage users</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/manage_bucket.php">Manage buckets</a>
                     </li>
                 <?php endif; ?>
+            </ul>
+            <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" href="/logout/index.php">Logout</a>
                 </li>
