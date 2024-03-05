@@ -1,29 +1,23 @@
 <?php
+include '../include_db.php';
 
-// Assuming you have already established a connection to the SQLite database
-include 'include_db.php';
-
-// Get the user data from the POST request
 $email = $_POST['email'];
 $password = $_POST['password'];
-$admission = $_POST['admission'];
-
-// Prepare the SQL statement to insert the user data into the User table
-$sql = "INSERT INTO User (email, password, admission) VALUES (:email, :password, :admission)";
+$isAdmin = isset($_POST['admission']) ? 1 : 0;
+$isApproved = $isAdmin ? 1 : 0;
+// Prepare the SQL statement to insert the user data into the User table$sql = "INSERT INTO Users (Email, Password, IsAdmin, IsApproved) VALUES (:email, :password, :isAdmin, :isApproved)";
+$sql = "INSERT INTO Users (Email, Password, IsApproved, IsAdmin) VALUES (:email, :password, :isApproved, :isAdmin)";
 $stmt = $db->prepare($sql);
 
-// Bind the values to the parameters in the SQL statement
+
 $stmt->bindParam(':email', $email);
 $stmt->bindParam(':password', $password);
-$stmt->bindParam(':admission', $admission);
+$stmt->bindParam(':isAdmin', $isAdmin, SQLITE3_INTEGER);
+$stmt->bindParam(':isApproved', $isApproved, SQLITE3_INTEGER);
 
-// Execute the SQL statement
+
 if ($stmt->execute()) {
-    // User data inserted successfully
-    echo "User data inserted successfully";
+    header('Location: /login');
 } else {
-    // Error occurred while inserting user data
     echo "Error occurred while inserting user data";
 }
-
-?>
