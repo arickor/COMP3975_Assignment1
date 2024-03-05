@@ -29,4 +29,25 @@ $SQL_create_table .= "CREATE TABLE IF NOT EXISTS Users (
 
 $db->exec($SQL_create_table);
 
+
+
+// Check if the Buckets table is empty
+$SQL_check_buckets = "SELECT COUNT(*) FROM Buckets";
+$result = $db->querySingle($SQL_check_buckets);
+
+// If the Buckets table is empty, insert the data
+if ($result == 0) {
+    $SQL_insert_buckets = "INSERT INTO Buckets (Category, ShopName) VALUES 
+    ('Entertainment', 'ST JAMES RESTAURAT'), ('Donation', 'RED CROSS'), 
+    ('Insurance', 'GATEWAY'), ('Groceries', 'PUR & SIMPLE RESTAUR'), 
+    ('Groceries', 'REAL CDN SUPERS'), ('Insurance', 'ICBC'), 
+    ('Utility', 'FORTISBC GAS'), ('Bank', 'BMO'), 
+    ('Groceries', 'WALMART STORE'), ('Groceries', 'COSTCO WHOLESAL'), 
+    ('Dining', '	MCDONALDS'), ('Dining', 'WHITE SPOT RESTAURAN'), ('Utility', 'SHAW CABLE'), 
+    ('Utility', 'CANADIAN TIRE'), ('Donation', 'World Vision'), ('Snack', 'TIM HORTONS'), 
+    ('Snack', '7-ELEVEN STORE'), ('Bank', 'CHQ'), ('Utility', 'ROGERS MOBILE'),
+    ('Bank', 'O.D.P'), ('Bank', 'MONTHLY ACCOUNT FEE')";
+    $db->exec($SQL_insert_buckets);
+}
+
 $db->close();
