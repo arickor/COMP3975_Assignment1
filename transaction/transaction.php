@@ -175,11 +175,12 @@ class Transaction
 
         echo "<div class='container mt-5'>";
         echo "<h1>Yearly Report for $year</h1>";
+        echo "<div class='table-responsive'>";  // Add this line
         echo "<table class='table table-striped table-bordered table-hover'>\n";
         echo "<thead class='thead-dark'>";
         echo "<tr><th scope='col'>Category</th>
-    <th scope='col'>Total Spent</th>
-    </tr>\n";
+<th scope='col'>Total Spent</th>
+</tr>\n";
         echo "</thead><tbody>";
 
         while ($row = $resultSet->fetchArray()) {
@@ -191,42 +192,86 @@ class Transaction
             echo "</tr>\n";
         }
         echo "</tbody></table>\n";
+        echo "</div>";  // Add this line
         echo "</div>";
-
         $db->close();
+        return $resultSet;
     }
 
-    // public static function showYearlyReport($year)
-    // {
-    //     include $_SERVER['DOCUMENT_ROOT'] . '/include_db.php';
-    
-    //     $resultSet = $db->query("SELECT Transactions.Date, Transactions.ShopName, Transactions.MoneySpent,
-    //                                 (SELECT Category FROM Buckets WHERE Transactions.ShopName LIKE '%' || Buckets.ShopName || '%') as Category
-    //                              FROM Transactions
-    //        ");
-    
-    //     echo "<div class='container mt-5'>";
-    //     echo "<h1>Yearly Report for $year</h1>";
-    
-    //     echo "<table class='table table-striped table-bordered table-hover'>\n";
-    //     echo "<thead class='thead-dark'>";
-    //     echo "<tr><th scope='col'>Date</th>
-    //     <th scope='col'>ShopName</th>
-    //     <th scope='col'>Category</th>
-    //     <th scope='col'>MoneySpent</th>
-    //     </tr>\n";
-    //     echo "</thead><tbody>";
-    
-    //     while ($row = $resultSet->fetchArray()) {
-    //         echo "<tr><td>{$row['Date']}</td>";
-    //         echo "<td>{$row['ShopName']}</td>";
-    //         echo "<td>{$row['Category']}</td>";
-    //         echo "<td>{$row['MoneySpent']}</td>";
-    //         echo "</tr>\n";
-    //     }
-    //     echo "</tbody></table>\n";
-    //     echo "</div>";
-    
-    //     $db->close();
-    // }
+    public static function showYearlyChart($year)
+
+    {
+        include $_SERVER['DOCUMENT_ROOT'] . '/include_db.php';
+
+        $resultSet = $db->query("SELECT 
+                                (SELECT Category FROM Buckets WHERE Transactions.ShopName LIKE '%' || Buckets.ShopName || '%') as Category, 
+                                SUM(Transactions.MoneySpent) as TotalSpent
+                             FROM Transactions
+                             WHERE substr(Date, 7) = '$year'
+                             GROUP BY Category");
+        $data = [];
+        while ($row = $resultSet->fetchArray()) {
+            if ($row['TotalSpent'] == 0) {
+                continue;
+            }
+            $data[] = ['category' => $row['Category'], 'totalSpent' => $row['TotalSpent']];
+        } {
+            include $_SERVER['DOCUMENT_ROOT'] . '/include_db.php';
+
+            $resultSet = $db->query("SELECT 
+                                    (SELECT Category FROM Buckets WHERE Transactions.ShopName LIKE '%' || Buckets.ShopName || '%') as Category, 
+                                    SUM(Transactions.MoneySpent) as TotalSpent
+                                 FROM Transactions
+                                 WHERE substr(Date, 7) = '$year'
+                                 GROUP BY Category");
+            $data = [];
+            while ($row = $resultSet->fetchArray()) {
+                if ($row['TotalSpent'] == 0) {
+                    continue;
+                }
+                $data[] = ['category' => $row['Category'], 'totalSpent' => $row['TotalSpent']];
+            }
+            echo '<div style="display: flex; justify-content: center; align-items: center; height: 60vh;">
+            <div style="display: flex; justify-content: center; align-items: center; width: 400px; height: 400px; border: 1px solid black; padding: 10px;">
+            <canvas id="yearlyChart"></canvas>
+            </div>
+            </div>';
+            
+            echo "<script>
+            var data = " . json_encode($data) . ";
+            
+            var ctx = document.getElementById('yearlyChart').getContext('2d');
+            var chart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: data.map(function(item) { return item.category; }),
+                    datasets: [{
+                        data: data.map(function(item) { return item.totalSpent; }),
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: false
+                }
+            });
+            </script>";
+        }
+        $db->close();
+    }
 }
