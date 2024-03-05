@@ -170,12 +170,11 @@ class Transaction
                                 (SELECT Category FROM Buckets WHERE Transactions.ShopName LIKE '%' || Buckets.ShopName || '%') as Category, 
                                 SUM(Transactions.MoneySpent) as TotalSpent
                              FROM Transactions
-                             WHERE strftime('%Y', Date) = '$year'
+                             WHERE substr(Date, 7) = '$year'
                              GROUP BY Category");
 
         echo "<div class='container mt-5'>";
         echo "<h1>Yearly Report for $year</h1>";
-
         echo "<table class='table table-striped table-bordered table-hover'>\n";
         echo "<thead class='thead-dark'>";
         echo "<tr><th scope='col'>Category</th>
