@@ -15,7 +15,11 @@
     require_once('transaction/transaction.php');
     include 'create_table/index.php';
     include 'import/index.php';
-
+    ?>
+    <div class="d-flex justify-content-end mt-4">
+        <a href="/logout/index.php" class="mr-4">Logout</a>
+    </div>
+    <?php
     Transaction::showTransactionTable();
 
     ?>
