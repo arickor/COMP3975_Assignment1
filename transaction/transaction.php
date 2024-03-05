@@ -11,6 +11,7 @@ class Transaction
 
         echo "<div class='container mt-5'>";
         echo "<p><a class='btn btn-success mb-3' href='/actions/create/create.php'>Create New</a></p>";
+        echo "<p><a class='btn btn-success mb-3' href='/report/index.php'>Report</a></p>";
 
         echo "<table class='table table-striped table-bordered table-hover'>\n";
         echo "<thead class='thead-dark'>";
@@ -159,5 +160,37 @@ class Transaction
         $db->close();
 
         return ['success' => true];
+    }
+
+    public static function showYearlyReport($year)
+    {
+        include $_SERVER['DOCUMENT_ROOT'] . '/include_db.php';
+
+        $resultSet = $db->query("SELECT 
+                                (SELECT Category FROM Buckets WHERE Transactions.ShopName LIKE '%' || Buckets.ShopName || '%') as Category, 
+                                SUM(Transactions.MoneySpent) as TotalSpent
+                             FROM Transactions
+                             WHERE strftime('%Y', Transactions.Date) = '$year'
+                             GROUP BY Category");
+
+        echo "<div class='container mt-5'>";
+        echo "<h1>Yearly Report for $year</h1>";
+
+        echo "<table class='table table-striped table-bordered table-hover'>\n";
+        echo "<thead class='thead-dark'>";
+        echo "<tr><th scope='col'>Category</th>
+    <th scope='col'>Total Spent</th>
+    </tr>\n";
+        echo "</thead><tbody>";
+
+        while ($row = $resultSet->fetchArray()) {
+            echo "<tr><td>{$row['Category']}</td>";
+            echo "<td>{$row['TotalSpent']}</td>";
+            echo "</tr>\n";
+        }
+        echo "</tbody></table>\n";
+        echo "</div>";
+
+        $db->close();
     }
 }

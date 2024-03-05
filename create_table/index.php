@@ -43,7 +43,7 @@ if ($result == 0) {
     ('Groceries', 'REAL CDN SUPERS'), ('Insurance', 'ICBC'), 
     ('Utility', 'FORTISBC GAS'), ('Bank', 'BMO'), 
     ('Groceries', 'WALMART STORE'), ('Groceries', 'COSTCO WHOLESAL'), 
-    ('Dining', '	MCDONALDS'), ('Dining', 'WHITE SPOT RESTAURAN'), ('Utility', 'SHAW CABLE'), 
+    ('Dining', 'MCDONALDS'), ('Dining', 'WHITE SPOT RESTAURAN'), ('Utility', 'SHAW CABLE'), 
     ('Utility', 'CANADIAN TIRE'), ('Donation', 'World Vision'), ('Snack', 'TIM HORTONS'), 
     ('Snack', '7-ELEVEN STORE'), ('Bank', 'CHQ'), ('Utility', 'ROGERS MOBILE'),
     ('Bank', 'O.D.P'), ('Bank', 'MONTHLY ACCOUNT FEE')";
