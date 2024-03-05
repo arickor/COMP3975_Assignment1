@@ -3,10 +3,6 @@
 
 include $_SERVER['DOCUMENT_ROOT'] . '/include_db.php';
 
-$SQL_drop_buckets = "DROP TABLE IF EXISTS Buckets";
-$db->exec($SQL_drop_buckets);
-
-
 $SQL_create_table = "CREATE TABLE IF NOT EXISTS Transactions (
     Date DATE NOT NULL,
     ShopName VARCHAR(100),
