@@ -30,9 +30,9 @@ class Transaction
             echo "<td>{$row[3]}</td>";
             echo "<td>{$row[4]}</td>";
             echo "<td>";
-            echo "<a class='btn btn-warning' href='/actions/update/update.php?date={$row[0]}&shopName={$row[1]}'>Update</a>";
+            echo "<a class='btn btn-warning' href='/actions/update/update.php?date=" . urlencode($row[0]) . "&shopName=" . urlencode($row[1]) . "'>Update</a>";
             echo "&nbsp;";
-            echo "<a class='btn btn-danger' href='/actions/delete/delete.php?date={$row[0]}&shopName={$row[1]}'>Delete</a>";
+            echo "<a class='btn btn-danger' href='/actions/delete/delete.php?date=" . urlencode($row[0]) . "&shopName=" . urlencode($row[1]) . "'>Delete</a>";
             echo "</td></tr>\n";
         }
         echo "</tbody></table>\n";
@@ -110,31 +110,31 @@ class Transaction
         return $transaction;
     }
 
-    public static function updateTransaction($oldDate, $oldShopName, $newDate, $newShopName, $moneySpent, $moneyDeposited, $bankBalance)
+    public static function updateTransaction($date, $shopName, $moneySpent, $moneyDeposited, $bankBalance)
     {
         include $_SERVER['DOCUMENT_ROOT'] . '/include_db.php';
 
         // Prepare an SQL statement
-        $stmt = $db->prepare("UPDATE Transactions SET Date = ?, ShopName = ?, MoneySpent = ?, MoneyDeposited = ?, BankBalance = ? WHERE Date = ? AND ShopName = ?");
+        $stmt = $db->prepare("UPDATE Transactions SET MoneySpent = ?, MoneyDeposited = ?, BankBalance = ? WHERE Date = ? AND ShopName = ?");
 
         // Bind parameters to the SQL statement
-        $stmt->bindValue(1, $newDate);
-        $stmt->bindValue(2, $newShopName);
-        $stmt->bindValue(3, $moneySpent);
-        $stmt->bindValue(4, $moneyDeposited);
-        $stmt->bindValue(5, $bankBalance);
-        $stmt->bindValue(6, $oldDate);
-        $stmt->bindValue(7, $oldShopName);
+        $stmt->bindValue(1, (float)$moneySpent);
+        $stmt->bindValue(2, (float)$moneyDeposited);
+        $stmt->bindValue(3, (float)$bankBalance);
+        $stmt->bindValue(4, $date);
+        $stmt->bindValue(5, $shopName);
 
-        try {
-            $stmt->execute();
-        } catch (Exception $e) {
-            // Handle the error
-            echo "Error: " . $e->getMessage();
+        // Execute the SQL statement and check if it was successful
+        if ($stmt->execute() === false) {
+            // The SQL statement failed, return an error message
+            return array('error' => 'Failed to update transaction');
         }
 
         // Close the database connection
         $db->close();
+
+        // The SQL statement was successful, return an empty array
+        return array();
     }
 
     public static function deleteTransaction($date, $shopName)

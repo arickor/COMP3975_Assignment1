@@ -68,7 +68,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                         </div>
 
                         <div class="form-group">
-                            <a href="../../index.php" class="btn btn-small btn-primary">&lt;&lt; BACK</a>
+                            <a href="../../index.php" class="btn btn-small btn-primary">&lt;&lt; Back</a>
                             &nbsp;&nbsp;&nbsp;
                             <input type="submit" value="Create" name="create" class="btn btn-success" />
                         </div>
