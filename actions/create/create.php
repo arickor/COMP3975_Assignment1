@@ -59,17 +59,12 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 
                         <div class="form-group">
                             <label for="MoneySpent" class="control-label">Money Spent</label>
-                            <input type="number" step="0.01" class="form-control" name="moneySpent" id="MoneySpent" required />
+                            <input type="number" step="0.01" class="form-control" name="moneySpent" id="MoneySpent" />
                         </div>
 
                         <div class="form-group">
                             <label for="MoneyDeposited" class="control-label">Money Deposited</label>
-                            <input type="number" step="0.01" class="form-control" name="moneyDeposited" id="MoneyDeposited" required />
-                        </div>
-
-                        <div class="form-group">
-                            <label for="BankBalance" class="control-label">Bank Balance</label>
-                            <input type="number" step="0.01" class="form-control" name="bankBalance" id="BankBalance" required />
+                            <input type="number" step="0.01" class="form-control" name="moneyDeposited" id="MoneyDeposited" />
                         </div>
 
                         <div class="form-group">

@@ -41,6 +41,21 @@ class Transaction
         $db->close();
     }
 
+    public static function getLatestBankBalance()
+    {
+        include $_SERVER['DOCUMENT_ROOT'] . '/include_db.php';
+
+        $resultSet = $db->query('SELECT BankBalance FROM Transactions');
+
+        $rows = [];
+        while ($row = $resultSet->fetchArray()) {
+            $rows[] = $row;
+        }
+
+        $lastRow = end($rows);
+        return $lastRow ? floatval($lastRow['BankBalance']) : 0;
+    }
+
     public static function addTransaction($date, $shopName, $moneySpent, $moneyDeposited, $bankBalance)
     {
         include $_SERVER['DOCUMENT_ROOT'] . '/include_db.php';
@@ -56,6 +71,60 @@ class Transaction
         $stmt->bindValue(3, $moneySpent);
         $stmt->bindValue(4, $moneyDeposited);
         $stmt->bindValue(5, $bankBalance);
+
+        try {
+            $stmt->execute();
+        } catch (Exception $e) {
+            // Handle the error
+            echo "Error: " . $e->getMessage();
+        }
+
+        // Close the database connection
+        $db->close();
+    }
+
+    public static function getTransaction($date, $shopName)
+    {
+        include $_SERVER['DOCUMENT_ROOT'] . '/include_db.php';
+
+        // Prepare an SQL statement
+        $stmt = $db->prepare("SELECT * FROM Transactions WHERE Date = ? AND ShopName = ?");
+
+        // Bind parameters to the SQL statement
+        $stmt->bindValue(1, $date);
+        $stmt->bindValue(2, $shopName);
+
+        // Execute the SQL statement and fetch the result
+        $result = $stmt->execute();
+        $transaction = $result->fetchArray(SQLITE3_ASSOC);
+
+        // Check if a transaction was found
+        if ($transaction === false) {
+            // No transaction was found, return an empty array
+            $transaction = array();
+        }
+
+        // Close the database connection
+        $db->close();
+
+        return $transaction;
+    }
+
+    public static function updateTransaction($oldDate, $oldShopName, $newDate, $newShopName, $moneySpent, $moneyDeposited, $bankBalance)
+    {
+        include $_SERVER['DOCUMENT_ROOT'] . '/include_db.php';
+
+        // Prepare an SQL statement
+        $stmt = $db->prepare("UPDATE Transactions SET Date = ?, ShopName = ?, MoneySpent = ?, MoneyDeposited = ?, BankBalance = ? WHERE Date = ? AND ShopName = ?");
+
+        // Bind parameters to the SQL statement
+        $stmt->bindValue(1, $newDate);
+        $stmt->bindValue(2, $newShopName);
+        $stmt->bindValue(3, $moneySpent);
+        $stmt->bindValue(4, $moneyDeposited);
+        $stmt->bindValue(5, $bankBalance);
+        $stmt->bindValue(6, $oldDate);
+        $stmt->bindValue(7, $oldShopName);
 
         try {
             $stmt->execute();
