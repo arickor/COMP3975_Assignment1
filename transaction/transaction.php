@@ -170,7 +170,7 @@ class Transaction
                                 (SELECT Category FROM Buckets WHERE Transactions.ShopName LIKE '%' || Buckets.ShopName || '%') as Category, 
                                 SUM(Transactions.MoneySpent) as TotalSpent
                              FROM Transactions
-                             WHERE strftime('%Y', Transactions.Date) = '$year'
+                             WHERE strftime('%Y', Date) = '$year'
                              GROUP BY Category");
 
         echo "<div class='container mt-5'>";
@@ -184,6 +184,9 @@ class Transaction
         echo "</thead><tbody>";
 
         while ($row = $resultSet->fetchArray()) {
+            if ($row['TotalSpent'] == 0) {
+                continue;
+            }
             echo "<tr><td>{$row['Category']}</td>";
             echo "<td>{$row['TotalSpent']}</td>";
             echo "</tr>\n";
@@ -193,4 +196,38 @@ class Transaction
 
         $db->close();
     }
+
+    // public static function showYearlyReport($year)
+    // {
+    //     include $_SERVER['DOCUMENT_ROOT'] . '/include_db.php';
+    
+    //     $resultSet = $db->query("SELECT Transactions.Date, Transactions.ShopName, Transactions.MoneySpent,
+    //                                 (SELECT Category FROM Buckets WHERE Transactions.ShopName LIKE '%' || Buckets.ShopName || '%') as Category
+    //                              FROM Transactions
+    //        ");
+    
+    //     echo "<div class='container mt-5'>";
+    //     echo "<h1>Yearly Report for $year</h1>";
+    
+    //     echo "<table class='table table-striped table-bordered table-hover'>\n";
+    //     echo "<thead class='thead-dark'>";
+    //     echo "<tr><th scope='col'>Date</th>
+    //     <th scope='col'>ShopName</th>
+    //     <th scope='col'>Category</th>
+    //     <th scope='col'>MoneySpent</th>
+    //     </tr>\n";
+    //     echo "</thead><tbody>";
+    
+    //     while ($row = $resultSet->fetchArray()) {
+    //         echo "<tr><td>{$row['Date']}</td>";
+    //         echo "<td>{$row['ShopName']}</td>";
+    //         echo "<td>{$row['Category']}</td>";
+    //         echo "<td>{$row['MoneySpent']}</td>";
+    //         echo "</tr>\n";
+    //     }
+    //     echo "</tbody></table>\n";
+    //     echo "</div>";
+    
+    //     $db->close();
+    // }
 }

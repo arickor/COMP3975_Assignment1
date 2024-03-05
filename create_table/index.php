@@ -3,6 +3,10 @@
 
 include $_SERVER['DOCUMENT_ROOT'] . '/include_db.php';
 
+$SQL_drop_buckets = "DROP TABLE IF EXISTS Buckets";
+$db->exec($SQL_drop_buckets);
+
+
 $SQL_create_table = "CREATE TABLE IF NOT EXISTS Transactions (
     Date DATE NOT NULL,
     ShopName VARCHAR(100),
@@ -38,8 +42,8 @@ $result = $db->querySingle($SQL_check_buckets);
 // If the Buckets table is empty, insert the data
 if ($result == 0) {
     $SQL_insert_buckets = "INSERT INTO Buckets (Category, ShopName) VALUES 
-    ('Entertainment', 'ST JAMES RESTAURAT'), ('Donation', 'RED CROSS'), 
-    ('Insurance', 'GATEWAY'), ('Groceries', 'PUR & SIMPLE RESTAUR'), 
+    ('Entertainment', 'ST JAMES RESTAURAT'), ('Donation', 'RED CROSS'), ('Groceries', 'SAFEWAY'),
+    ('Insurance', 'GATEWAY'), ('Groceries', 'PUR & SIMPLE RESTAUR'), ('Dining', 'subway'),
     ('Groceries', 'REAL CDN SUPERS'), ('Insurance', 'ICBC'), 
     ('Utility', 'FORTISBC GAS'), ('Bank', 'BMO'), 
     ('Groceries', 'WALMART STORE'), ('Groceries', 'COSTCO WHOLESAL'), 
