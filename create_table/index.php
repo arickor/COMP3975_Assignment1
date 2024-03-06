@@ -25,9 +25,9 @@ $SQL_create_table .= "CREATE TABLE IF NOT EXISTS UncategorizedShops (
 
 $db->exec($SQL_create_table);
 
-// Drop the Buckets table
-$SQL_drop_buckets = "DROP TABLE IF EXISTS Buckets";
-$db->exec($SQL_drop_buckets);
+// // Drop the Buckets table
+// $SQL_drop_buckets = "DROP TABLE IF EXISTS Buckets";
+// $db->exec($SQL_drop_buckets);
 
 // Create the Buckets table without foreign key constraint
 $SQL_create_buckets = "CREATE TABLE Buckets (

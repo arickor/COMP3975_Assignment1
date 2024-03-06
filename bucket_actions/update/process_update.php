@@ -7,7 +7,7 @@ if (isset($_POST['update'])) {
     $category = $_POST['category'];
 
     // Call the updateBucket method
-    $result = Buckets::updateBucket($shopName, $category);
+    $result = Buckets::updateBucket($category, $shopName);
 
     if (isset($result['error'])) {
         // The updateBucket method returned an error, redirect to the update page with the error message
