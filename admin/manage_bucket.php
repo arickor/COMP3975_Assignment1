@@ -25,8 +25,12 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
         <?php
         // Assuming you have already connected to the SQLite database
 
-        // Add a back button with Bootstrap classes
-        echo "<button onclick='goToIndex()' class='btn btn-primary'>Go Back</button>";
+        echo "
+        <div class='d-flex justify-content-between mb-3'>
+            <button onclick='goToIndex()' class='btn btn-primary'>Go Back</button>
+            <a class='btn btn-success' href='/bucket_actions/create/create.php'>Create New</a>
+        </div>
+        ";
 
         echo "
         <script>
@@ -36,9 +40,6 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
         </script>
         ";
 
-        // Add a "Create New" button
-        echo "<p><a class='btn btn-success mb-3' href='/bucket_actions/create/create.php'>Create New</a></p>";
-
         // Retrieve the Category and ShopName from the Buckets table
         include $_SERVER['DOCUMENT_ROOT'] . '/include_db.php';
 
@@ -47,16 +48,16 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
         if ($resultSet->fetchArray()) {
             // Data exists in the UncategorizedShops table, show the table
             echo '<h2>Uncategorized Shop Names</h2>';
-            echo '<table>';
-            echo '<tr><th>Shop Name</th></tr>';
-        
+            echo '<table class="table table-striped">';
+            echo '<thead class="thead-dark"><tr><th>Shop Name</th></tr></thead>';
+
             // Reset resultSet to the beginning
             $resultSet->reset();
-        
+
             while ($row = $resultSet->fetchArray()) {
                 echo '<tr><td>' . $row['ShopName'] . '</td></tr>';
             }
-        
+
             echo '</table>';
         }
 
