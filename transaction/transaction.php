@@ -10,8 +10,15 @@ class Transaction
         $resultSet = $db->query('SELECT * FROM Transactions');
 
         echo "<div class='container mt-5'>";
-        echo "<p><a class='btn btn-success mb-3' href='/actions/create/create.php'>Create New</a></p>";
-        echo "<p><a class='btn btn-success mb-3' href='/report/index.php'>Report</a></p>";
+        echo "<div class='row'>";
+        echo "<div class='col-md-8'>";
+        echo "<p><a class='btn btn-success mb-1' href='/actions/create/create.php'>Create New</a>";
+        echo "<a class='btn btn-success mb-1 ml-2' href='/import/import.php'>Import</a></p>";
+        echo "</div>";
+        echo "<div class='col-md-4 text-right'>";
+        echo "<p><a class='btn btn-info mb-1' href='/report/index.php'>Report</a></p>";
+        echo "</div>";
+        echo "</div>";
 
         echo "<table class='table table-striped table-bordered table-hover'>\n";
         echo "<thead class='thead-dark'>";
