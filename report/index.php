@@ -11,6 +11,10 @@
 </head>
 
 <body>
+
+    <div class="d-flex justify-content-center mt-5">
+        <a href="/index.php" class="btn btn-primary">Back</a>
+    </div>
     <!-- Your HTML form to get the year input from the user -->
     <div class="d-flex justify-content-center mt-5">
         <form method="POST">
@@ -34,7 +38,7 @@
         </form>
     </div>';
     }
-    
+
     // Show the pie chart
     if (isset($_POST['showChart'])) {
         $year = $_POST['year'];
