@@ -43,6 +43,10 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
         // Retrieve the Category and ShopName from the Buckets table
         include $_SERVER['DOCUMENT_ROOT'] . '/include_db.php';
 
+
+      //delete all elements in UncategorizedShops
+        // $db->exec("DELETE FROM UncategorizedShops");
+
         $resultSet = $db->query("SELECT * FROM UncategorizedShops");
 
         if ($resultSet->fetchArray()) {
