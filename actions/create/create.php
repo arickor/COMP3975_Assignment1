@@ -77,5 +77,8 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
         </div>
     </div>
 </body>
+<?php
+include '../../footer.php';
+?>
 
 </html>

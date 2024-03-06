@@ -56,5 +56,7 @@ if ($_SESSION["loggedin"] !== true) {
     ?>
 
 </body>
-
+<?php
+include 'footer.php';
+?>
 </html>

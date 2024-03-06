@@ -77,3 +77,6 @@ $db->close();
 </form>
 
 <br />
+<?php
+include '../../footer.php';
+?>

@@ -105,5 +105,8 @@ $bankBalanceValue = $transaction['BankBalance'];
         </div>
     </div>
 </body>
+<?php
+include '../../footer.php';
+?>
 
 </html>

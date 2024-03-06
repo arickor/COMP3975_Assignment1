@@ -45,5 +45,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <input type="file" name="csvFile" accept=".csv">
         <input type="submit" value="Upload">
     </form>
+<br>
+    <a href="/index.php">Back</a>
 </body>
+<?php
+include '../footer.php';
+?>
 </html>
