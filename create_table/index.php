@@ -2,6 +2,12 @@
 
 include $_SERVER['DOCUMENT_ROOT'] . '/include_db.php';
 
+// Check if the user is logged in, if not then redirect to login page
+if ($_SESSION["loggedin"] !== true) {
+    header("location: /login/index.php");
+    exit;
+}
+
 $SQL_create_table = "CREATE TABLE IF NOT EXISTS Transactions (
     Date DATE NOT NULL,
     ShopName VARCHAR(100),

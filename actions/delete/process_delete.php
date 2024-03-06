@@ -1,5 +1,11 @@
 <?php
 
+// Check if the user is logged in, if not then redirect to login page
+if ($_SESSION["loggedin"] !== true) {
+    header("location: /login/index.php");
+    exit;
+}
+
 if (isset($_POST['delete'])) {
     require_once("../../transaction/transaction.php");
 

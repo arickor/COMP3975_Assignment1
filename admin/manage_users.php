@@ -2,6 +2,12 @@
 // Connect to the SQLite database
 include '../include_db.php';
 
+// Check if the user is logged in, if not then redirect to login page
+if ($_SESSION["loggedin"] !== true) {
+    header("location: /login/index.php");
+    exit;
+}
+
 // Check if form was submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['users'])) {
     // Update the IsApproved field for each submitted email

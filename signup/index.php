@@ -27,10 +27,10 @@
                         <input type="password" class="form-control" id="password" name="password" minlength="6" required>
                         <div class="invalid-feedback">Password must be at least 6 characters long.</div>
                     </div>
-                    <div class="form-group form-check">
+                    <!-- <div class="form-group form-check">
                         <input type="checkbox" class="form-check-input" id="admission" name="admission">
                         <label class="form-check-label" for="admission">Are you an administrator?</label>
-                    </div>
+                    </div> -->
                     <button type="submit" class="btn btn-primary">Sign Up</button>
                 </form>
             </div>
