@@ -30,24 +30,24 @@ $db->exec($SQL_create_table);
 // $db->exec($SQL_drop_buckets);
 
 // Create the Buckets table without foreign key constraint
-$SQL_create_buckets = "CREATE TABLE Buckets (
+$SQL_create_buckets = "CREATE TABLE IF NOT EXISTS Buckets (
     Category VARCHAR(100) NOT NULL,
     ShopName VARCHAR(100) NOT NULL,
     PRIMARY KEY (ShopName)
 )";
 $db->exec($SQL_create_buckets);
 
-// Insert data into the Buckets table
-$SQL_insert_buckets = "INSERT INTO Buckets (Category, ShopName) VALUES 
-('Entertainment', 'ST JAMES RESTAURAT'), ('Donation', 'RED CROSS'), ('Groceries', 'SAFEWAY'),
-('Insurance', 'GATEWAY          MSP'), ('Dining', 'PUR & SIMPLE RESTAUR'), ('Dining', 'Subway'),
-('Groceries', 'REAL CDN SUPERS'), ('Insurance', 'ICBC             INS'), 
-('Utility', 'FORTISBC GAS'), ('Bank', 'BMO'), 
-('Groceries', 'WALMART STORE'), ('Groceries', 'COSTCO WHOLESAL'), 
-('Dining', 'MCDONALDS'), ('Dining', 'WHITE SPOT RESTAURAN'), ('Utility', 'SHAW CABLE'), 
-('Utility', 'CANADIAN TIRE'), ('Donation', 'World Vision     MSP'), ('Dining', 'TIM HORTONS'), 
-('Groceries', '7-ELEVEN STORE'), ('Bank', 'CHQ'), ('Utility', 'ROGERS MOBILE'), ('Insurance', 'ICBC'), 
-('Bank', 'O.D.P'), ('Bank', 'MONTHLY ACCOUNT FEE')";
-$db->exec($SQL_insert_buckets);
+// // Insert data into the Buckets table
+// $SQL_insert_buckets = "INSERT INTO Buckets (Category, ShopName) VALUES 
+// ('Entertainment', 'ST JAMES RESTAURAT'), ('Donation', 'RED CROSS'), ('Groceries', 'SAFEWAY'),
+// ('Insurance', 'GATEWAY          MSP'), ('Dining', 'PUR & SIMPLE RESTAUR'), ('Dining', 'Subway'),
+// ('Groceries', 'REAL CDN SUPERS'), ('Insurance', 'ICBC             INS'), 
+// ('Utility', 'FORTISBC GAS'), ('Bank', 'BMO'), 
+// ('Groceries', 'WALMART STORE'), ('Groceries', 'COSTCO WHOLESAL'), 
+// ('Dining', 'MCDONALDS'), ('Dining', 'WHITE SPOT RESTAURAN'), ('Utility', 'SHAW CABLE'), 
+// ('Utility', 'CANADIAN TIRE'), ('Donation', 'World Vision     MSP'), ('Dining', 'TIM HORTONS'), 
+// ('Groceries', '7-ELEVEN STORE'), ('Bank', 'CHQ'), ('Utility', 'ROGERS MOBILE'), ('Insurance', 'ICBC'), 
+// ('Bank', 'O.D.P'), ('Bank', 'MONTHLY ACCOUNT FEE')";
+// $db->exec($SQL_insert_buckets);
 
 $db->close();
