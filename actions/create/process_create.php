@@ -31,7 +31,7 @@ if (isset($_POST['create'])) {
     $tableName = "Transactions";
 
     Transaction::addTransaction($date, $shopName, $moneySpent, $moneyDeposited, $bankBalance);
-
+    Transaction::addUncategorizedShopName($shopName);
     if (isset($result['error'])) {
         header('Location: create.php?error=' . urlencode($result['error']));
         exit;

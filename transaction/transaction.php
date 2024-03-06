@@ -42,6 +42,21 @@ class Transaction
         $db->close();
     }
 
+    public static function addUncategorizedShopName($shopName) {
+        include $_SERVER['DOCUMENT_ROOT'] . '/include_db.php';
+        $resultSet = $db->query("SELECT * FROM Buckets WHERE ShopName LIKE '%$shopName%'");
+    
+        if (!$resultSet->fetchArray()) {
+            // The shop name is not in the Buckets table, add it to the UncategorizedShops table
+            $db->exec("INSERT INTO UncategorizedShops (ShopName) VALUES ('$shopName')");
+        }
+    }
+    
+    public static function removeUncategorizedShopName($shopName) {
+        include $_SERVER['DOCUMENT_ROOT'] . '/include_db.php';
+        $db->exec("DELETE FROM UncategorizedShops WHERE ShopName LIKE '%$shopName%'");
+    }
+
     public static function getLatestBankBalance()
     {
         include $_SERVER['DOCUMENT_ROOT'] . '/include_db.php';

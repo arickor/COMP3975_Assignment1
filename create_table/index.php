@@ -27,6 +27,10 @@ $SQL_create_table .= "CREATE TABLE IF NOT EXISTS Users (
     PRIMARY KEY (Email)
 );";
 
+$SQL_create_table .= "CREATE TABLE IF NOT EXISTS UncategorizedShops (
+    ShopName varchar(255) PRIMARY KEY
+)";
+
 $db->exec($SQL_create_table);
 
 // Drop the Buckets table

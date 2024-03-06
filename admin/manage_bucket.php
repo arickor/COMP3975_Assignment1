@@ -41,6 +41,25 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 
         // Retrieve the Category and ShopName from the Buckets table
         include $_SERVER['DOCUMENT_ROOT'] . '/include_db.php';
+
+        $resultSet = $db->query("SELECT * FROM UncategorizedShops");
+
+        if ($resultSet->fetchArray()) {
+            // Data exists in the UncategorizedShops table, show the table
+            echo '<h2>Uncategorized Shop Names</h2>';
+            echo '<table>';
+            echo '<tr><th>Shop Name</th></tr>';
+        
+            // Reset resultSet to the beginning
+            $resultSet->reset();
+        
+            while ($row = $resultSet->fetchArray()) {
+                echo '<tr><td>' . $row['ShopName'] . '</td></tr>';
+            }
+        
+            echo '</table>';
+        }
+
         $query = "SELECT Category, ShopName FROM Buckets";
         $result = $db->query($query);
 

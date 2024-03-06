@@ -2,6 +2,7 @@
 
 if (isset($_POST['create'])) {
     require_once("../../buckets/buckets.php");
+    require_once("../../transaction/transaction.php");
 
     extract($_POST);
 
@@ -19,6 +20,9 @@ if (isset($_POST['create'])) {
 
     // Add the new bucket
     $result = Buckets::addBucket($category, $shopName);
+    Transaction::removeUncategorizedShopName($shopName);
+
+    
 
     if (isset($result['error'])) {
         header('Location: create.php?error=' . urlencode($result['error']));
