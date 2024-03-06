@@ -47,6 +47,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 
         if ($resultSet->fetchArray()) {
             // Data exists in the UncategorizedShops table, show the table
+            echo '<div class="d-inline-block">';
             echo '<h2>Uncategorized Shop Names</h2>';
             echo '<table class="table table-striped">';
             echo '<thead class="thead-dark"><tr><th>Shop Name</th></tr></thead>';
@@ -59,6 +60,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
             }
 
             echo '</table>';
+            echo '</div>';
         }
 
         $query = "SELECT Category, ShopName FROM Buckets";
