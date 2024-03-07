@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 echo $_SESSION['role'];
                             }
                             $_SESSION['loggedin'] = true;
-                            echo $_SESSION['loggedin'];
+                            echo $_SESSION['loggedin'] . " logged in as 1";
                             // ob_end_flush();
                             header('Location: ../index.php');
                             exit();
