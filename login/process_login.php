@@ -1,9 +1,9 @@
 <?php
 include $_SERVER['DOCUMENT_ROOT'] . '/include_db.php';
-// require $_SERVER['DOCUMENT_ROOT'] . '/initialize.php';
+require $_SERVER['DOCUMENT_ROOT'] . '/initialize.php';
 
 // ob_start(); // Start output buffering at the beginning of your script
-session_start();
+// session_start();
 
 $email_err = $password_err = '';
 
