@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 include $_SERVER['DOCUMENT_ROOT'] . '/include_db.php';
 

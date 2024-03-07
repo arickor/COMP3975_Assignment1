@@ -1,4 +1,5 @@
 <?php
+session_start();
 // Connect to the SQLite database
 include '../include_db.php';
 
