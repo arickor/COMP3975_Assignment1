@@ -2,6 +2,7 @@
 require '../initialize.php';
 
 require_once("../transaction/transaction.php");
+
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Check if a file is selected
@@ -53,6 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                         // Insert the transaction into the Transaction table
                         Transaction::addTransaction($date, $shopName, $moneySpent, $moneyDeposited, $bankBalance);
+                        Transaction::addUncategorizedShopName($shopName);
                     }
 
                     // Close the CSV file
