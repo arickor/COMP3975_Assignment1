@@ -22,7 +22,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/initialize.php';
     <?php
     include $_SERVER['DOCUMENT_ROOT'] . '/create_table/index.php';
 
-    // include $_SERVER['DOCUMENT_ROOT'] . '/import/index.php';
+    include $_SERVER['DOCUMENT_ROOT'] . '/import/import.php';
     ?>
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
