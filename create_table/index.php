@@ -57,7 +57,7 @@ $row = $result->fetchArray();
 if ($row[0] == 0) {
     // Users table is empty, insert the user
     $SQL_insert_user = "INSERT INTO Users (Email, Password, IsApproved, IsAdmin) VALUES 
-    ('aa@aa.aa', 'P@$$w0rd', TRUE, TRUE)";
+    ('aa@aa.aa', 'P@$$w0rd', 1, 1)";
     $db->exec($SQL_insert_user);
 }
 
