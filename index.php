@@ -1,8 +1,5 @@
 <?php
 require $_SERVER['DOCUMENT_ROOT'] . '/initialize.php';
-include $_SERVER['DOCUMENT_ROOT'] . '/transaction/transaction.php';
-include $_SERVER['DOCUMENT_ROOT'] . '/create_table/index.php';
-include $_SERVER['DOCUMENT_ROOT'] . '/import/index.php';
 ?>
 
 <h1>it works</h1>
@@ -23,7 +20,9 @@ include $_SERVER['DOCUMENT_ROOT'] . '/import/index.php';
 <body>
 
     <?php
+    include $_SERVER['DOCUMENT_ROOT'] . '/create_table/index.php';
 
+    // include $_SERVER['DOCUMENT_ROOT'] . '/import/index.php';
     ?>
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -50,6 +49,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/import/index.php';
     </nav>
 
     <?php
+    include $_SERVER['DOCUMENT_ROOT'] . '/transaction/transaction.php';
     Transaction::showTransactionTable();
     ?>
 
