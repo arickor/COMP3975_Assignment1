@@ -1,8 +1,11 @@
-<h1>it works</h1>
-
 <?php
-session_start();
+require $_SERVER['DOCUMENT_ROOT'] . '/initialize.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/transaction/transaction.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/create_table/index.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/import/index.php';
 ?>
+
+<h1>it works</h1>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -20,9 +23,7 @@ session_start();
 <body>
 
     <?php
-    include $_SERVER['DOCUMENT_ROOT'] . '/transaction/transaction.php';
-    include $_SERVER['DOCUMENT_ROOT'] . '/create_table/index.php';
-    include $_SERVER['DOCUMENT_ROOT'] . '/import/index.php';
+
     ?>
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
