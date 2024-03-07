@@ -1,13 +1,11 @@
 <?php
 require $_SERVER['DOCUMENT_ROOT'] . '/initialize.php';
-?>
 
-<?php 
-if ($_SESSION["role"] !== "admin") {
-    header("location: /index.php");
-    exit();
-} elseif (!isset($_SESSION['loggedin'])) {
+if (!isset($_SESSION['loggedin'])) {
     header('Location: /login/index.php');
+    exit();
+} elseif ($_SESSION["role"] !== "admin") {
+    header("location: /index.php");
     exit();
 }
 ?>
