@@ -40,26 +40,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         if ($row['IsApproved'] == 1) {
                             if ($row['IsAdmin'] == 1) {
                                 $_SESSION['role'] = "admin";
+                                echo $_SESSION['role'];
                             } else {
                                 $_SESSION['role'] = "user";
+                                echo $_SESSION['role'];
                             }
                             $_SESSION['loggedin'] = true;
+                            echo $_SESSION['loggedin'];
                             // ob_end_flush();
-                            header('Location: ../index.php');
+                            // header('Location: ../index.php');
                             exit();
                         } else {
                             $email_err = 'Your account has not been approved yet.';
-                            header('Location: index.php');
+                            echo $email_err;
+                            // header('Location: index.php');
                             exit();
                         }
                     } else {
                         $password_err = 'Incorrect password.';
-                        header('Location: index.php');
+                        echo $password_err;
+                        // header('Location: index.php');
                         exit();
                     }
                 } else {
                     $email_err = 'Email does not exist.';
-                    header('Location: index.php');
+                    echo $email_err;
+                    // header('Location: index.php');
                     exit();
                 }
                 $_SESSION['email_err'] = $email_err;
