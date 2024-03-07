@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if ($row) {
                     if ($password === $row['Password']) { // Compare the passwords
                         if ($row['IsApproved'] == 1) {
-                            header('Location: ../index.php');
+                            // header('Location: ../index.php');
                             if ($row['IsAdmin'] == 1) {
                                 $_SESSION['role'] = "admin";
                             } else {
