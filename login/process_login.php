@@ -6,16 +6,21 @@ include $_SERVER['DOCUMENT_ROOT'] . '/include_db.php';
 session_start();
 
 $email_err = $password_err = '';
+echo "before start";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     extract($_POST);
     $email = $email;
     $password = $password;
+    echo $email;
+    echo $password;
 
     if (empty(trim($_POST['email']))) {
         $email_err = 'Please enter your email.';
+        echo $email_err;
     } else {
         $email = trim($_POST['email']);
+        echo $email;
     }
 
     // Validate password
@@ -23,8 +28,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $password_err = 'Please enter your password.';
     } else {
         $password = trim($_POST['password']);
+        echo $password;
     }
-
+    echo "before check table";
     if (empty($email_err) && empty($password_err)) {
         $sql = 'SELECT * FROM Users WHERE Email = :email';
         $stmt = $db->prepare($sql);
