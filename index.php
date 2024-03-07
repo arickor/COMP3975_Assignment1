@@ -1,8 +1,11 @@
 <?php
 require $_SERVER['DOCUMENT_ROOT'] . '/initialize.php';
-?>
 
-<!-- <h1>it works</h1> -->
+if (is_null($_SESSION['loggedin']) || !isset($_SESSION['loggedin'])) {
+    header('Location: /login/index.php');
+    exit();
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
