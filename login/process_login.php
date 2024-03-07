@@ -63,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
                 $_SESSION['email_err'] = $email_err;
                 $_SESSION['password_err'] = $password_err;
-                header('Location: /index.php');
+                header('Location: index.php');
             } else {
                 echo 'Oops! Something went wrong. Please try again later.';
             }
