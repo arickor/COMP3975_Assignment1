@@ -1,12 +1,5 @@
 <?php
-session_start();
-
-// Check if the user is logged in, if not then redirect to login page
-if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
-    header("location: /login/index.php");
-    $_SESSION['authorization_error'] = 'Please login to view the page';
-    exit;
-}
+require '../initialize.php';
 ?>
 
 <?php 

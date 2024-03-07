@@ -1,14 +1,8 @@
 <?php
-session_start();
+require '../initialize.php';
+
 // Connect to the SQLite database
 include '../include_db.php';
-
-// Check if the user is logged in, if not then redirect to login page
-if ($_SESSION["loggedin"] !== true) {
-    header("location: /login/index.php");
-    exit;
-}
-
 
 if ($_SESSION["role"] !== "admin") {
     header("location: /index.php");

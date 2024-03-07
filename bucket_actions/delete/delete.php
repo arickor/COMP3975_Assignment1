@@ -1,13 +1,7 @@
 <?php
-session_start();
+require '../../initialize.php';
 
 include $_SERVER['DOCUMENT_ROOT'] . '/include_db.php';
-
-// Check if the user is logged in, if not then redirect to login page
-if ($_SESSION["loggedin"] !== true) {
-    header("location: /login/index.php");
-    exit;
-}
 
 if (isset($_GET['shopName'])) {
 
@@ -73,7 +67,7 @@ $db->close();
                 <br />
                 <form action="process_delete.php" method="post">
                     <input type="hidden" value="<?php echo $shopName ?>" name="shopName" />
-                    <a href="../../index.php" class="btn btn-primary btn-sm">&lt;&lt; BACK</a>
+                    <a href="../../index.php" class="btn btn-primary">&lt;&lt; BACK</a>
                     &nbsp;&nbsp;&nbsp;
                     <input type="submit" value="Delete" class="btn btn-danger" name="delete" />
                 </form>
