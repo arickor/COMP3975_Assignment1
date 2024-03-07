@@ -5,6 +5,10 @@ require '../initialize.php';
 <?php 
 if ($_SESSION["role"] !== "admin") {
     header("location: /index.php");
+    exit();
+} elseif (!isset($_SESSION['loggedin'])) {
+    header('Location: /login/index.php');
+    exit();
 }
 ?>
 <!DOCTYPE html>
