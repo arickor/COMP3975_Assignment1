@@ -4,8 +4,12 @@ require '../initialize.php';
 // Connect to the SQLite database
 include '../include_db.php';
 
-if ($_SESSION["role"] !== "admin") {
+if (!isset($_SESSION['loggedin'])) {
+    header('Location: /login/index.php');
+    exit();
+} elseif ($_SESSION["role"] !== "admin") {
     header("location: /index.php");
+    exit();
 }
 
 
