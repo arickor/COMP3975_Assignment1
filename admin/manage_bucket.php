@@ -1,5 +1,5 @@
 <?php
-require '../initialize.php';
+require $_SERVER['DOCUMENT_ROOT'] . '/initialize.php';
 ?>
 
 <?php 
