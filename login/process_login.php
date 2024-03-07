@@ -2,7 +2,7 @@
 include $_SERVER['DOCUMENT_ROOT'] . '/include_db.php';
 require $_SERVER['DOCUMENT_ROOT'] . '/initialize.php';
 
-ob_start(); // Start output buffering at the beginning of your script
+// ob_start(); // Start output buffering at the beginning of your script
 // session_start();
 
 $email_err = $password_err = '';
@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 $_SESSION['role'] = "user";
                             }
                             $_SESSION['loggedin'] = true;
-                            ob_end_flush();
+                            // ob_end_flush();
                             header('Location: ../index.php');
                             exit();
                         } else {
