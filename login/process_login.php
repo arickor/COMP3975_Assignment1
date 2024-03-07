@@ -1,7 +1,7 @@
 <?php
 include $_SERVER['DOCUMENT_ROOT'] . '/include_db.php';
 
-ob_start(); // Start output buffering at the beginning of your script
+// ob_start(); // Start output buffering at the beginning of your script
 session_start();
 
 $email_err = $password_err = '';
