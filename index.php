@@ -31,7 +31,6 @@ require $_SERVER['DOCUMENT_ROOT'] . '/initialize.php';
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mr-auto">
-                <?php echo $_SESSION['role']; ?>
                 <?php if ($_SESSION['role'] === 'admin') : ?>
                     <li class="nav-item">
                         <a class="nav-link" href="/admin/manage_users.php">Manage users</a>
