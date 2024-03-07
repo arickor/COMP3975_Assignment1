@@ -1,5 +1,5 @@
 <?php
-
+include $_SERVER['DOCUMENT_ROOT'] . '/include_db.php';
 
 session_start();
 
@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Check if there are no errors
     if (empty($email_err) && empty($password_err)) {
-        include_once '../include_db.php';
+        // include_once '../include_db.php';
         $sql = 'SELECT * FROM Users WHERE Email = :email';
         $stmt = $db->prepare($sql);
 
