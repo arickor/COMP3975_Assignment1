@@ -22,7 +22,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/initialize.php';
     <?php
     include $_SERVER['DOCUMENT_ROOT'] . '/create_table/index.php';
 
-    // include $_SERVER['DOCUMENT_ROOT'] . '/import/index.php';
+    include $_SERVER['DOCUMENT_ROOT'] . '/import/index.php';
     ?>
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -31,6 +31,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/initialize.php';
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mr-auto">
+                <?php echo $_SESSION['role']; ?>
                 <?php if ($_SESSION['role'] === 'admin') : ?>
                     <li class="nav-item">
                         <a class="nav-link" href="/admin/manage_users.php">Manage users</a>
