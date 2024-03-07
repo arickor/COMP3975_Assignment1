@@ -72,23 +72,23 @@ $email_err = isset($_SESSION["email_err"]) ? $_SESSION["email_err"] : '';
 </body>
 
 </html>
-<!-- <?php
-        include $_SERVER['DOCUMENT_ROOT'] . '/include_db.php';
+<?php
+include $_SERVER['DOCUMENT_ROOT'] . '/include_db.php';
 
-        // Assuming $db is your SQLite3 connection
-        $resultSet = $db->query("SELECT * FROM Users");
+// Assuming $db is your SQLite3 connection
+$resultSet = $db->query("SELECT * FROM Users");
 
-        while ($row = $resultSet->fetchArray(SQLITE3_ASSOC)) {
-            print_r($row);
-            echo "<br>";
-        }
+while ($row = $resultSet->fetchArray(SQLITE3_ASSOC)) {
+    print_r($row);
+    echo "<br>";
+}
 
-        // Unset the session variables
-        unset($_SESSION["email_err"]);
-        unset($_SESSION["password_err"]);
-        unset($_SESSION["email"]);
-        unset($_SESSION["password"]);
-        ?> -->
+// Unset the session variables
+unset($_SESSION["email_err"]);
+unset($_SESSION["password_err"]);
+unset($_SESSION["email"]);
+unset($_SESSION["password"]);
+?>
 
 <script>
     window.onload = function() {
