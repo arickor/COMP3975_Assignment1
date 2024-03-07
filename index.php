@@ -1,10 +1,10 @@
 <?php
 require $_SERVER['DOCUMENT_ROOT'] . '/initialize.php';
 
-// if (!isset($_SESSION['loggedin'])) {
-//     header('Location: /login/index.php');
-//     exit();
-// }
+if (!isset($_SESSION['loggedin'])) {
+    header('Location: /login/index.php');
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
