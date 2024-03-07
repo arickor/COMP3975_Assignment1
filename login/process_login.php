@@ -1,6 +1,7 @@
 <?php
 include $_SERVER['DOCUMENT_ROOT'] . '/include_db.php';
 
+ob_start(); // Start output buffering at the beginning of your script
 session_start();
 
 $email_err = $password_err = '';
@@ -48,6 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 $_SESSION['role'] = "user";
                             }
                             $_SESSION['loggedin'] = true;
+                            header('Location: ../index.php');
                             exit();
                         } else {
                             $email_err = 'Your account has not been approved yet.';
