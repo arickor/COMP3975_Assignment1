@@ -50,4 +50,15 @@ $db->exec($SQL_create_buckets);
 // ('Bank', 'O.D.P'), ('Bank', 'MONTHLY ACCOUNT FEE')";
 // $db->exec($SQL_insert_buckets);
 
+$SQL_check_users = "SELECT COUNT(*) FROM Users";
+$result = $db->query($SQL_check_users);
+$row = $result->fetchArray();
+
+if ($row[0] == 0) {
+    // Users table is empty, insert the user
+    $SQL_insert_user = "INSERT INTO Users (Email, Password, IsApproved, IsAdmin) VALUES 
+    ('aa@aa.aa', 'P@$$w0rd', TRUE, TRUE)";
+    $db->exec($SQL_insert_user);
+}
+
 $db->close();
