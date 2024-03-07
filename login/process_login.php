@@ -44,6 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 $_SESSION['role'] = "user";
                             }
                             $_SESSION['loggedin'] = true;
+                            ob_end_flush();
                             header('Location: ../index.php');
                             exit();
                         } else {
