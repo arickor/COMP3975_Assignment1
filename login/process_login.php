@@ -45,10 +45,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             // header('Location: ../index.php');
                             if ($row['IsAdmin'] == 1) {
                                 $_SESSION['role'] = "admin";
+                                echo $_SESSION['role'];
                             } else {
                                 $_SESSION['role'] = "user";
+                                echo $_SESSION['role'];
                             }
                             $_SESSION['loggedin'] = true;
+                            echo $_SESSION['loggedin'];
                             header('Location: ../index.php');
                             exit();
                         } else {
@@ -71,6 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 header('Location: index.php');
             } else {
                 echo 'Oops! Something went wrong. Please try again later.';
+                header('Location: index.php');
             }
 
             unset($stmt);
