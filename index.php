@@ -1,5 +1,9 @@
 <h1>it works</h1>
 
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
