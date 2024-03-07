@@ -1,7 +1,7 @@
 <h1>it works</h1>
 
 <?php
-require 'initialize.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/initialize.php';
 ?>
 
 <!DOCTYPE html>
@@ -20,7 +20,7 @@ require 'initialize.php';
 <body>
 
     <?php
-    require_once('transaction/transaction.php');
+    include $_SERVER['DOCUMENT_ROOT'] . '/transaction/transaction.php';
     include $_SERVER['DOCUMENT_ROOT'] . '/create_table/index.php';
     include $_SERVER['DOCUMENT_ROOT'] . '/import/index.php';
     ?>
