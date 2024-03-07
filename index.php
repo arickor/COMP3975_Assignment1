@@ -19,8 +19,8 @@ require 'initialize.php';
 
     <?php
     require_once('transaction/transaction.php');
-    include 'create_table/index.php';
-    include 'import/index.php';
+    include $_SERVER['DOCUMENT_ROOT'] . '/create_table/index.php';
+    include $_SERVER['DOCUMENT_ROOT'] . '/import/index.php';
     ?>
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -54,4 +54,5 @@ require 'initialize.php';
 <?php
 include 'footer.php';
 ?>
+
 </html>
