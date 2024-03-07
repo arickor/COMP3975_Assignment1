@@ -9,6 +9,11 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 }
 ?>
 
+<?php 
+if ($_SESSION["role"] !== "admin") {
+    header("location: /index.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 

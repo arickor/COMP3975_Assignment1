@@ -9,6 +9,12 @@ if ($_SESSION["loggedin"] !== true) {
     exit;
 }
 
+
+if ($_SESSION["role"] !== "admin") {
+    header("location: /index.php");
+}
+
+
 // Check if form was submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['users'])) {
     // Update the IsApproved field for each submitted email
