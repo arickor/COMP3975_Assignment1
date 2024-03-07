@@ -1,7 +1,7 @@
 <?php
 include $_SERVER['DOCUMENT_ROOT'] . '/include_db.php';
 
-// ob_start(); // Start output buffering at the beginning of your script
+ob_start(); // Start output buffering at the beginning of your script
 session_start();
 
 $email_err = $password_err = '';
@@ -54,14 +54,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         } else {
                             $email_err = 'Your account has not been approved yet.';
                             header('Location: index.php');
+                            exit();
                         }
                     } else {
                         $password_err = 'Incorrect password.';
                         header('Location: index.php');
+                        exit();
                     }
                 } else {
                     $email_err = 'Email does not exist.';
                     header('Location: index.php');
+                    exit();
                 }
                 $_SESSION['email_err'] = $email_err;
                 $_SESSION['password_err'] = $password_err;
