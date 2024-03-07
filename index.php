@@ -1,3 +1,5 @@
+<h1>it works</h1>
+
 <?php
 require 'initialize.php';
 ?>
