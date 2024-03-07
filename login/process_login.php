@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         $password = trim($_POST['password']);
     }
-    echo "before check table";
+    // echo "before check table";
     if (empty($email_err) && empty($password_err)) {
         $sql = 'SELECT * FROM Users WHERE Email = :email';
         $stmt = $db->prepare($sql);
