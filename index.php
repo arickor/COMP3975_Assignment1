@@ -1,5 +1,6 @@
 <?php
 require $_SERVER['DOCUMENT_ROOT'] . '/initialize.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/create_table/index.php';
 
 if (!isset($_SESSION['loggedin'])) {
     header('Location: /login/index.php');
@@ -23,8 +24,6 @@ if (!isset($_SESSION['loggedin'])) {
 <body>
 
     <?php
-    include $_SERVER['DOCUMENT_ROOT'] . '/create_table/index.php';
-
     // include $_SERVER['DOCUMENT_ROOT'] . '/import/import.php';
     ?>
 
