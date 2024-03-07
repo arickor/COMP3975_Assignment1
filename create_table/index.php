@@ -14,8 +14,8 @@ $SQL_create_table = "CREATE TABLE IF NOT EXISTS Transactions (
 $SQL_create_table .= "CREATE TABLE IF NOT EXISTS Users (
     Email VARCHAR(255) NOT NULL,
     Password VARCHAR(255) NOT NULL,
-    IsApproved BOOLEAN DEFAULT FALSE,
-    IsAdmin BOOLEAN DEFAULT FALSE,
+    IsApproved INT DEFAULT 0,
+    IsAdmin INT DEFAULT 0,
     PRIMARY KEY (Email)
 );";
 
