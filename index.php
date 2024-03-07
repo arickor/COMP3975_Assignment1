@@ -2,7 +2,7 @@
 require $_SERVER['DOCUMENT_ROOT'] . '/initialize.php';
 ?>
 
-<h1>it works</h1>
+<!-- <h1>it works</h1> -->
 
 <!DOCTYPE html>
 <html lang="en">
