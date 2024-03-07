@@ -1,19 +1,17 @@
 <?php
 include $_SERVER['DOCUMENT_ROOT'] . '/include_db.php';
+require $_SERVER['DOCUMENT_ROOT'] . '/initialize.php';
 
 ob_start(); // Start output buffering at the beginning of your script
-session_start();
+// session_start();
 
 $email_err = $password_err = '';
-// $email = $password = '';
 
-// Process form data when the form is submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     extract($_POST);
     $email = $email;
     $password = $password;
 
-    // Validate email
     if (empty(trim($_POST['email']))) {
         $email_err = 'Please enter your email.';
     } else {
@@ -27,9 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $password = trim($_POST['password']);
     }
 
-    // Check if there are no errors
     if (empty($email_err) && empty($password_err)) {
-        // include_once '../include_db.php';
         $sql = 'SELECT * FROM Users WHERE Email = :email';
         $stmt = $db->prepare($sql);
 
@@ -40,18 +36,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($result) {
                 $row = $result->fetchArray(SQLITE3_ASSOC);
                 if ($row) {
-                    if ($password === $row['Password']) { // Compare the passwords
+                    if ($password === $row['Password']) {
                         if ($row['IsApproved'] == 1) {
-                            // header('Location: ../index.php');
                             if ($row['IsAdmin'] == 1) {
                                 $_SESSION['role'] = "admin";
-                                echo $_SESSION['role'];
                             } else {
                                 $_SESSION['role'] = "user";
-                                echo $_SESSION['role'];
                             }
                             $_SESSION['loggedin'] = true;
-                            echo $_SESSION['loggedin'];
                             header('Location: ../index.php');
                             exit();
                         } else {
@@ -71,16 +63,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
                 $_SESSION['email_err'] = $email_err;
                 $_SESSION['password_err'] = $password_err;
-                header('Location: index.php');
             } else {
                 echo 'Oops! Something went wrong. Please try again later.';
-                header('Location: index.php');
             }
 
             unset($stmt);
         }
     }
-    }
-    // Close the database connection
-    $db->close();
+}
+$db->close();
 
