@@ -1,9 +1,5 @@
 <h1>it works</h1>
 
-<?php
-include $_SERVER['DOCUMENT_ROOT'] . '/initialize.php';
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
